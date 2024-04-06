@@ -1,6 +1,6 @@
 package ru.spring.spring_boot;
 
-public class JsonDataOfUserIncome {
+public class UserIncomeDTO {
     private long id;
     private int income;
 

@@ -1,4 +1,4 @@
-package ru.spring.spring_boot.service;
+package ru.spring.spring_boot.services;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

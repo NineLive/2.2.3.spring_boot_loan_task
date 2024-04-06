@@ -1,4 +1,4 @@
-package ru.spring.spring_boot.configuration;
+package ru.spring.spring_boot.configurations;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

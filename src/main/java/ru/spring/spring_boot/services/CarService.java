@@ -1,4 +1,4 @@
-package ru.spring.spring_boot.service;
+package ru.spring.spring_boot.services;
 
 import org.springframework.data.domain.Limit;
 import ru.spring.spring_boot.models.Car;

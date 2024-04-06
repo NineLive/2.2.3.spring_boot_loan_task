@@ -22,9 +22,6 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "income")
-    private double income;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "car_id")
     public Car car;
@@ -76,14 +73,6 @@ public class User {
 
     public void setCar(Car car) {
         this.car = car;
-    }
-
-    public double getIncome() {
-        return income;
-    }
-
-    public void setIncome(double income) {
-        this.income = income;
     }
 
     @Override
