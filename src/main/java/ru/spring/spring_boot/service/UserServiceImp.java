@@ -14,34 +14,34 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public class UserServiceImp implements UserService {
 
-   private final UserRepository userRepository;
+    private final UserRepository userRepository;
 
-   @Autowired
-   public UserServiceImp(UserRepository userRepository) {
-      this.userRepository = userRepository;
-   }
+    @Autowired
+    public UserServiceImp(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
-   public List<User> findAll(){
-      return userRepository.findAll();
-   }
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
 
-   public User findOne(long id){
-      Optional<User> foundCar = userRepository.findById(id);
-      return foundCar.orElse(null);
-   }
-   @Transactional
-   public void save(User user){
-      userRepository.save(user);
-   }
+    public Optional<User> findById(long id) {
+        return userRepository.findById(id);
+    }
 
-   @Transactional
-   public void update(long id, User updatedUser){
-      userRepository.save(updatedUser);
-   }
+    @Transactional
+    public void save(User user) {
+        userRepository.save(user);
+    }
 
-   @Transactional
-   public void delete(long id){
-      userRepository.deleteById(id);
-   }
+    @Transactional
+    public void update(long id, User updatedUser) {
+        userRepository.save(updatedUser);
+    }
+
+    @Transactional
+    public void delete(long id) {
+        userRepository.deleteById(id);
+    }
 
 }

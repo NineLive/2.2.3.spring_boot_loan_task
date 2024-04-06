@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Limit;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.spring.spring_boot.SortIsBlockingException;
+import ru.spring.spring_boot.exceptions.SortIsBlockingException;
 import ru.spring.spring_boot.configuration.CarProperties;
 import ru.spring.spring_boot.models.Car;
 import ru.spring.spring_boot.repositories.CarRepository;
@@ -32,9 +32,8 @@ public class CarServiceImp implements CarService {
         return carRepository.findAll();
     }
 
-    public Car findOne(long id) {
-        Optional<Car> foundCar = carRepository.findById(id);
-        return foundCar.orElse(null);
+    public Optional<Car> findById(long id) {
+        return carRepository.findById(id);
     }
 
     @Transactional
@@ -78,7 +77,7 @@ public class CarServiceImp implements CarService {
 
     @Override
     public void checkSortBlocking(String sortBy) {
-        if (carProperties.getListOfDisabledSort().contains(sortBy)){
+        if (carProperties.getListOfDisabledSort().contains(sortBy)) {
             throw new SortIsBlockingException();
         }
     }

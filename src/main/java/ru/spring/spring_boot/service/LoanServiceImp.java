@@ -3,16 +3,21 @@ package ru.spring.spring_boot.service;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.spring.spring_boot.JsonData;
+import org.springframework.web.client.RestTemplate;
+import ru.spring.spring_boot.JsonDataOfUserIncome;
 import ru.spring.spring_boot.configuration.LoanProperties;
 import ru.spring.spring_boot.models.User;
 
 import java.io.IOException;
-import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -29,14 +34,9 @@ public class LoanServiceImp implements LoanService {
     @Override
     @Transactional
     public double calculateLoan(User user) {
-        setUsersIncome(getListJsonData());
-        Optional<User> userOptional = Optional.ofNullable(user);
-        if (userOptional.isEmpty()) {
-            return 0;
-        }
-
-        double userIncome = user.getIncome();
-        double carCoast = user.getCar().getCost();
+        User updatedUser = setUserIncome(getListJsonData(), user);
+        double carCoast = (updatedUser.getCar().isPresent()) ? updatedUser.getCar().get().getCost() : 0;
+        double userIncome = updatedUser.getIncome();
         double loanByUserIncomeForHalfYear = userIncome * 6;
         double loanByCarCost = carCoast * loanProperties.getPercentOfLoanByCarCost();
         if (carCoast > loanProperties.getMinimalCarCost() || userIncome > loanProperties.getMinimalIncome()) {
@@ -46,25 +46,34 @@ public class LoanServiceImp implements LoanService {
     }
 
     @Override
-    public List<JsonData> getListJsonData() {
-        try{
-            URL url = new URL("https://66055cd12ca9478ea1801f2e.mockapi.io/api/users/income");
-            ObjectMapper objectMapper = new ObjectMapper();
-            List<JsonData> listCar = objectMapper.readValue(url, new TypeReference<>() { });
-            return listCar;
-        } catch (IOException e){
-            throw new RuntimeException(e);
-        }
+    public List<JsonDataOfUserIncome> getListJsonData() {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "https://66055cd12ca9478ea1801f2e.mockapi.io/api/users/income";
+        restTemplate.getMessageConverters().add(new GsonHttpMessageConverter());
+        ResponseEntity<List<JsonDataOfUserIncome>> responseEntity = restTemplate.exchange(url, HttpMethod.GET,
+                null, new ParameterizedTypeReference<>() {
+                });
+        return responseEntity.getBody();
+
+//        try{
+//            ObjectMapper objectMapper = new ObjectMapper();
+//            RestTemplate restTemplate = new RestTemplate();
+//            String url = "https://66055cd12ca9478ea1801f2e.mockapi.io/api/users/income";
+//            ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
+//            return objectMapper.readValue(response.getBody(), new TypeReference<>() { });
+//        } catch (IOException e){
+//            throw new RuntimeException(e);
+//        }
     }
 
     @Override
     @Transactional
-    public void setUsersIncome(List<JsonData> list) {
-        for (JsonData jsonData : list) {
-            User user = userService.findOne(jsonData.getId());
-            user.setIncome(jsonData.getIncome());
-            userService.update(jsonData.getId(), user);
-            System.out.println("user обновлен id = " + jsonData.getId());
-        }
+    public User setUserIncome(List<JsonDataOfUserIncome> list, User user) {
+        list.forEach(e -> {
+            if (e.getId() == user.getId()) {
+                user.setIncome(e.getIncome());
+            }
+        });
+        return user;
     }
 }

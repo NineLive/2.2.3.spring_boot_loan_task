@@ -4,11 +4,12 @@ package ru.spring.spring_boot.service;
 import ru.spring.spring_boot.models.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     public List<User> findAll();
 
-    public User findOne(long id);
+    public Optional<User> findById(long id);
 
     public void save(User user);
 

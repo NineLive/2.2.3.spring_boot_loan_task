@@ -11,13 +11,13 @@ public class CarProperties {
 
     private int maxCar;
 
-    private List<Object> listOfDisabledSort;
+    private List<String> listOfDisabledSort;
 
-    public List<Object> getListOfDisabledSort() {
+    public List<String> getListOfDisabledSort() {
         return listOfDisabledSort;
     }
 
-    public void setListOfDisabledSort(List<Object> listOfDisabledSort) {
+    public void setListOfDisabledSort(List<String> listOfDisabledSort) {
         this.listOfDisabledSort = listOfDisabledSort;
     }
 

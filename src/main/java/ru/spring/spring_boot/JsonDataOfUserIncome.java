@@ -1,6 +1,6 @@
 package ru.spring.spring_boot;
 
-public class JsonData {
+public class JsonDataOfUserIncome {
     private long id;
     private int income;
 
@@ -12,7 +12,7 @@ public class JsonData {
         this.id = id;
     }
 
-    public int getIncome() {
+    public double getIncome() {
         return income;
     }
 

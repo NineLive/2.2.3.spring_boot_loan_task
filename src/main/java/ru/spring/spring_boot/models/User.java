@@ -3,6 +3,8 @@ package ru.spring.spring_boot.models;
 
 import jakarta.persistence.*;
 
+import java.util.Optional;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -68,8 +70,8 @@ public class User {
         this.email = email;
     }
 
-    public Car getCar() {
-        return car;
+    public Optional<Car> getCar() {
+        return Optional.ofNullable(car);
     }
 
     public void setCar(Car car) {

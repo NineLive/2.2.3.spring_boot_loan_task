@@ -1,13 +1,14 @@
 package ru.spring.spring_boot.service;
 
-import ru.spring.spring_boot.JsonData;
+import ru.spring.spring_boot.JsonDataOfUserIncome;
 import ru.spring.spring_boot.models.User;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface LoanService {
     public double calculateLoan(User user);
-    public List<JsonData> getListJsonData();
-    public void setUsersIncome(List<JsonData> list);
+
+    public List<JsonDataOfUserIncome> getListJsonData();
+
+    public User setUserIncome(List<JsonDataOfUserIncome> list, User user);
 }

@@ -4,11 +4,12 @@ import org.springframework.data.domain.Limit;
 import ru.spring.spring_boot.models.Car;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CarService {
     public List<Car> findAll();
 
-    public Car findOne(long id);
+    public Optional<Car> findById(long id);
 
     public void save(Car car);
 
