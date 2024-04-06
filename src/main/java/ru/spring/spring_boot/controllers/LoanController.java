@@ -26,9 +26,9 @@ public class LoanController {
     }
 
     @GetMapping()
-    public String index(@RequestParam(value = "id", required = false) Long id) {
+    public double index(@RequestParam(value = "id", required = false) Long id) {
         User user = userService.findOne(id);
         double loan = loanService.calculateLoan(user);
-        return "{\" loan \":\" %s \"}".formatted(loan);
+        return loan;
     }
 }
