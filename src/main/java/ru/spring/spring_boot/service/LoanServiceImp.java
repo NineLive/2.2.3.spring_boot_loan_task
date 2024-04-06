@@ -32,7 +32,6 @@ public class LoanServiceImp implements LoanService {
     }
 
     @Override
-    @Transactional
     public double calculateLoan(User user) {
         User updatedUser = setUserIncome(getListJsonData(), user);
         double carCoast = (updatedUser.getCar().isPresent()) ? updatedUser.getCar().get().getCost() : 0;
@@ -67,7 +66,6 @@ public class LoanServiceImp implements LoanService {
     }
 
     @Override
-    @Transactional
     public User setUserIncome(List<JsonDataOfUserIncome> list, User user) {
         list.forEach(e -> {
             if (e.getId() == user.getId()) {
