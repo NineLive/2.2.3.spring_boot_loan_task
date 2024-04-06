@@ -4,12 +4,10 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ru.spring.spring_boot.JsonData;
 import ru.spring.spring_boot.configuration.LoanProperties;
 import ru.spring.spring_boot.models.User;
-import ru.spring.spring_boot.repositories.CarRepository;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,13 +17,11 @@ import java.util.Optional;
 @Service
 @Transactional(readOnly = true)
 public class LoanServiceImp implements LoanService {
-    public CarRepository carRepository;
     public UserService userService;
     public LoanProperties loanProperties;
 
     @Autowired
-    public LoanServiceImp(CarRepository carRepository, UserService userService, LoanProperties loanProperties) {
-        this.carRepository = carRepository;
+    public LoanServiceImp(UserService userService, LoanProperties loanProperties) {
         this.userService = userService;
         this.loanProperties = loanProperties;
     }
