@@ -9,10 +9,6 @@ import java.util.List;
 @ConfigurationProperties(prefix = "carproperties")
 public class CarProperties {
 
-    private boolean sortByModel;
-
-    private boolean sortBySeries;
-
     private int maxCar;
 
     private List<Object> listOfDisabledSort;
@@ -33,19 +29,4 @@ public class CarProperties {
         this.maxCar = maxCar;
     }
 
-    public boolean isSortByModel() {
-        return sortByModel;
-    }
-
-    public void setSortByModel(boolean sortByModel) {
-        this.sortByModel = sortByModel;
-    }
-
-    public boolean isSortBySeries() {
-        return sortBySeries;
-    }
-
-    public void setSortBySeries(boolean sortBySeries) {
-        this.sortBySeries = sortBySeries;
-    }
 }

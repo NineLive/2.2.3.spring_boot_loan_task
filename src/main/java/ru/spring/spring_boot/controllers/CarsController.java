@@ -33,7 +33,6 @@ public class CarsController {
         carService.checkSortBlocking(sortBy);
         List<Car> carList = carService.getCarsByGivenCounter(count);
         model.addAttribute("cars", carService.sortByField(carList, sortBy));
-        System.out.println("privet");
         return "main/cars";
     }
 }

@@ -11,6 +11,8 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         show_sql: true
+        hbm2ddl:
+          auto: update
 
 carproperties:
   maxCar: 6
@@ -18,3 +20,7 @@ carproperties:
     - model
     - id
 
+loan:
+  minimalIncome: 40000
+  minimalCarCost: 1000000
+  percentOfLoanByCarCost: 0.3
