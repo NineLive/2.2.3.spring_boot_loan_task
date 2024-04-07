@@ -51,9 +51,9 @@ public class LoanServiceImp implements LoanService {
         restTemplate.getMessageConverters().add(new GsonHttpMessageConverter());
         ResponseEntity<List<UserIncomeDTO>> responseEntity = restTemplate.exchange(url, HttpMethod.GET,null,
                 new ParameterizedTypeReference<>() { });
-        for (UserIncomeDTO element : responseEntity.getBody()) {
-            if (id == element.getId()) {
-                return element.getIncome();
+        for (UserIncomeDTO userIncomeDTO : responseEntity.getBody()) {
+            if (id == userIncomeDTO.getId()) {
+                return userIncomeDTO.getIncome();
             }
         }
         return 0;
