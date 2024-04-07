@@ -23,9 +23,9 @@ public class CarsController {
     }
 
     @GetMapping()
-    public String cars(@RequestParam(value = "count", required = false) Integer count,
-                        @RequestParam(value = "sortBy", required = false) String sortBy,
-                        Model model) {
+    public String showCars(@RequestParam(value = "count", required = false) Integer count,
+                           @RequestParam(value = "sortBy", required = false) String sortBy,
+                           Model model) {
         carService.checkSortBlocking(sortBy);
         List<Car> carList = carService.getCarsByGivenCounter(count);
         model.addAttribute("cars", carService.sortByField(carList, sortBy));

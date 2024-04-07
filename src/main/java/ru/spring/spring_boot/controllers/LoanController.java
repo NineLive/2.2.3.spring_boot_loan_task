@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.spring.spring_boot.exceptions.UserNotFoundException;
-import ru.spring.spring_boot.models.User;
 import ru.spring.spring_boot.services.LoanService;
-import ru.spring.spring_boot.services.UserService;
 
 @RestController
 @RequestMapping("/loan")
@@ -19,13 +17,13 @@ public class LoanController {
     }
 
     @GetMapping()
-    public double loan(@RequestParam("id") Long id) {
+    public double showLoan(@RequestParam("id") Long id) {
         return loanService.calculateLoan(id);
     }
 
     @ExceptionHandler(value = UserNotFoundException.class)
     public ResponseEntity<String> handle(){
-        String body = "Oooops, NOT FOUND!!!  User with this ID not found";
+        String body = "Oooops, NOT FOUND!!! User with this ID not found";
         return ResponseEntity.badRequest().body(body);
     }
 }

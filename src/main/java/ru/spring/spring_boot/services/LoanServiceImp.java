@@ -31,13 +31,7 @@ public class LoanServiceImp implements LoanService {
     public double calculateLoan(long id) {
         if (userService.findById(id).isPresent()) {
             User user = userService.findById(id).get();
-            double userIncome = 0;
-            List<UserIncomeDTO> list = getListJsonData();
-            for(UserIncomeDTO element: list){
-                if(user.getId()==element.getId()){
-                    userIncome = element.getIncome();
-                }
-            }
+            double userIncome = getUserIncome(id);
             double carCoast = (user.getCar().isPresent()) ? user.getCar().get().getCost() : 0;
             double loanByUserIncomeForHalfYear = userIncome * 6;
             double loanByCarCost = carCoast * loanProperties.getPercentOfLoanByCarCost();
@@ -51,13 +45,17 @@ public class LoanServiceImp implements LoanService {
     }
 
     @Override
-    public List<UserIncomeDTO> getListJsonData() {
+    public double getUserIncome(long id) {
         RestTemplate restTemplate = new RestTemplate();
         String url = "https://66055cd12ca9478ea1801f2e.mockapi.io/api/users/income";
         restTemplate.getMessageConverters().add(new GsonHttpMessageConverter());
-        ResponseEntity<List<UserIncomeDTO>> responseEntity = restTemplate.exchange(url, HttpMethod.GET,
-                null, new ParameterizedTypeReference<>() {
-                });
-        return responseEntity.getBody();
+        ResponseEntity<List<UserIncomeDTO>> responseEntity = restTemplate.exchange(url, HttpMethod.GET,null,
+                new ParameterizedTypeReference<>() { });
+        for (UserIncomeDTO element : responseEntity.getBody()) {
+            if (id == element.getId()) {
+                return element.getIncome();
+            }
+        }
+        return 0;
     }
 }
