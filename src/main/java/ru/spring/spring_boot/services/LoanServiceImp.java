@@ -47,7 +47,7 @@ public class LoanServiceImp implements LoanService {
     @Override
     public double getUserIncome(long id) {
         RestTemplate restTemplate = new RestTemplate();
-        String url = "https://66055cd12ca9478ea1801f2e.mockapi.io/api/users/income";
+        String url = loanProperties.getUserIncomeUrl();
         restTemplate.getMessageConverters().add(new GsonHttpMessageConverter());
         ResponseEntity<List<UserIncomeDTO>> responseEntity = restTemplate.exchange(url, HttpMethod.GET,null,
                 new ParameterizedTypeReference<>() { });
