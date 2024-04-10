@@ -14,7 +14,7 @@ import ru.mystarter.userincome.UserIncome;
 public class LoanServiceImp implements LoanService {
     public UserService userService;
     public LoanProperties loanProperties;
-    public  UserIncome userIncome;
+    public UserIncome userIncome;
 
     @Autowired
     public LoanServiceImp(UserService userService, LoanProperties loanProperties, UserIncome userIncome) {
