@@ -1,30 +1,26 @@
 package ru.spring.spring_boot.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
-import ru.spring.spring_boot.UserIncomeDTO;
+import ru.mystarter.userincome.UserIncomeDTO;
 import ru.spring.spring_boot.configurations.LoanProperties;
 import ru.spring.spring_boot.exceptions.UserNotFoundException;
 import ru.spring.spring_boot.models.User;
-
-import java.util.List;
+import ru.mystarter.userincome.UserIncome;
 
 @Service
 @Transactional(readOnly = true)
 public class LoanServiceImp implements LoanService {
     public UserService userService;
     public LoanProperties loanProperties;
+    public  UserIncome userIncome;
 
     @Autowired
-    public LoanServiceImp(UserService userService, LoanProperties loanProperties) {
+    public LoanServiceImp(UserService userService, LoanProperties loanProperties, UserIncome userIncome) {
         this.userService = userService;
         this.loanProperties = loanProperties;
+        this.userIncome = userIncome;
     }
 
     @Override
@@ -46,12 +42,7 @@ public class LoanServiceImp implements LoanService {
 
     @Override
     public double getUserIncome(long id) {
-        RestTemplate restTemplate = new RestTemplate();
-        String url = loanProperties.getUserIncomeUrl();
-        restTemplate.getMessageConverters().add(new GsonHttpMessageConverter());
-        ResponseEntity<List<UserIncomeDTO>> responseEntity = restTemplate.exchange(url, HttpMethod.GET,null,
-                new ParameterizedTypeReference<>() { });
-        for (UserIncomeDTO userIncomeDTO : responseEntity.getBody()) {
+        for (UserIncomeDTO userIncomeDTO : userIncome.getListUserIncome()) {
             if (id == userIncomeDTO.getId()) {
                 return userIncomeDTO.getIncome();
             }
