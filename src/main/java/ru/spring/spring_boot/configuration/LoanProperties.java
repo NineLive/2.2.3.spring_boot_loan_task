@@ -1,4 +1,4 @@
-package ru.spring.spring_boot.configurations;
+package ru.spring.spring_boot.configuration;
 
 import lombok.Getter;
 import lombok.Setter;

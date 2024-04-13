@@ -1,17 +1,16 @@
-package ru.spring.spring_boot.services;
+package ru.spring.spring_boot.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.spring.spring_boot.models.User;
-import ru.spring.spring_boot.repositories.UserRepository;
+import ru.spring.spring_boot.model.User;
+import ru.spring.spring_boot.repository.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional(readOnly = true)
 public class UserServiceImp implements UserService {
 
     private final UserRepository userRepository;

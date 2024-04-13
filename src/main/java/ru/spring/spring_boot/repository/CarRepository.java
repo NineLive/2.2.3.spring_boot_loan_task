@@ -1,9 +1,9 @@
-package ru.spring.spring_boot.repositories;
+package ru.spring.spring_boot.repository;
 
 import org.springframework.data.domain.Limit;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ru.spring.spring_boot.models.Car;
+import ru.spring.spring_boot.model.Car;
 
 import java.util.List;
 

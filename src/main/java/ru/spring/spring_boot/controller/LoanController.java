@@ -1,10 +1,10 @@
-package ru.spring.spring_boot.controllers;
+package ru.spring.spring_boot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.spring.spring_boot.exceptions.UserNotFoundException;
-import ru.spring.spring_boot.services.LoanService;
+import ru.spring.spring_boot.exception.UserNotFoundException;
+import ru.spring.spring_boot.service.LoanService;
 
 @RestController
 @RequestMapping("/loan")

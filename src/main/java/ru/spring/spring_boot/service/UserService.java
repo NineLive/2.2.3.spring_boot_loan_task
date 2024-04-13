@@ -1,7 +1,7 @@
-package ru.spring.spring_boot.services;
+package ru.spring.spring_boot.service;
 
 
-import ru.spring.spring_boot.models.User;
+import ru.spring.spring_boot.model.User;
 
 import java.util.List;
 import java.util.Optional;

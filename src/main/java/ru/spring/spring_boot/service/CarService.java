@@ -1,7 +1,7 @@
-package ru.spring.spring_boot.services;
+package ru.spring.spring_boot.service;
 
 import org.springframework.data.domain.Limit;
-import ru.spring.spring_boot.models.Car;
+import ru.spring.spring_boot.model.Car;
 
 import java.util.List;
 import java.util.Optional;

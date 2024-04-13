@@ -1,13 +1,13 @@
-package ru.spring.spring_boot.services;
+package ru.spring.spring_boot.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Limit;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.spring.spring_boot.exceptions.SortIsBlockingException;
-import ru.spring.spring_boot.configurations.CarProperties;
-import ru.spring.spring_boot.models.Car;
-import ru.spring.spring_boot.repositories.CarRepository;
+import ru.spring.spring_boot.exception.SortIsBlockingException;
+import ru.spring.spring_boot.configuration.CarProperties;
+import ru.spring.spring_boot.model.Car;
+import ru.spring.spring_boot.repository.CarRepository;
 
 import java.util.Comparator;
 import java.util.List;
@@ -15,7 +15,6 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Service
-@Transactional(readOnly = true)
 public class CarServiceImp implements CarService {
     public CarRepository carRepository;
 

@@ -1,13 +1,13 @@
-package ru.spring.spring_boot.controllers;
+package ru.spring.spring_boot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ru.spring.spring_boot.exceptions.SortIsBlockingException;
-import ru.spring.spring_boot.models.Car;
-import ru.spring.spring_boot.services.CarService;
+import ru.spring.spring_boot.exception.SortIsBlockingException;
+import ru.spring.spring_boot.model.Car;
+import ru.spring.spring_boot.service.CarService;
 
 import java.util.List;
 

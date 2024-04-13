@@ -1,4 +1,4 @@
-package ru.spring.spring_boot.models;
+package ru.spring.spring_boot.model;
 
 
 import jakarta.persistence.*;
